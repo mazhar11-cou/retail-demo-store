@@ -144,9 +144,9 @@ export default {
     checkout: function () {
       this.$router.push('/checkout');
     },
-    triggerAbandonedCartEmail : function () {
-      console.log("Xo:0")
-      AnalyticsHandler.recordAbanonedCartEvent(this.user,this.cart)
+    async triggerAbandonedCartEmail () {
+      const cartItem = await this.getProductByID(this.cart.items[0].product_id)
+      AnalyticsHandler.recordAbanonedCartEvent(this.user,this.cart,cartItem)
     },    
     removeFromCart (value) {
       for (var item in this.cart.items) {
